@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "debug": "nodemon --inspect index.js",
+    "debug:brk": "nodemon --inspect-brk index.js",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix"
   },
