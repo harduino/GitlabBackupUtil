@@ -1,10 +1,10 @@
 {
-  "name": "gitlab-backup-util",
+  "name": "gitlab-backup-util-harduino",
   "version": "1.1.0",
   "description": "A small utility to backup or clone all projects you have on gitlab.",
   "main": "index.js",
   "bin": {
-    "gitlab-backup-util": "index.js"
+    "gitlab-backup-util-harduino": "index.js"
   },
   "scripts": {
     "start": "node index.js",
