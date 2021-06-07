@@ -1,6 +1,7 @@
 token.json
 node_modules/
 backup/
+gitlab-backup/
 
 ### VisualStudioCode ###
 .vscode/*
