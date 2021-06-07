@@ -24,6 +24,7 @@
     "cli-progress": "^3.8.2",
     "lodash": "^4.17.20",
     "node-cmd": "^3.0.0",
+    "parse-url": "^5.0.3",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "yargs": "^16.0.3"
