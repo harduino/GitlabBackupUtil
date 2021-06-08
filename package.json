@@ -8,8 +8,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "debug": "nodemon --inspect index.js",
-    "debug:brk": "nodemon --inspect-brk index.js",
+    "debug": "nodemon --watch index.js --inspect index.js",
+    "debug:brk": "nodemon --watch index.js --inspect-brk index.js",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix"
   },
