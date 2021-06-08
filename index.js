@@ -45,6 +45,9 @@ const cliProgress = require('cli-progress');
     .help(true)
     .argv
 
+  // force verbose
+  argv.verbose = true;
+
   const baseUrl = argv.url || 'https://gitlab.com'
   if(argv.verbose){
     console.log(`Set gitlab url to ${baseUrl}`)
