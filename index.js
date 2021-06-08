@@ -40,13 +40,8 @@ const cliProgress = require('cli-progress');
     .help(true)
     .argv
 
-  // force verbose
-  argv.verbose = true;
-
   const baseUrl = argv.url || 'https://gitlab.com'
-  if(argv.verbose){
-    console.log(`Set gitlab url to ${baseUrl}`)
-  }
+  console.log(`Set gitlab url to ${baseUrl}`)
   console.log()
   if (!argv.token) {
     console.log(
@@ -67,16 +62,12 @@ const cliProgress = require('cli-progress');
   }
 
   const user = await rp.get(`${baseUrl}/api/v4/user`, requestOptions)
-  if (argv.verbose) {
-    console.log(`Got user: ${user.name} (${user.username}) ID: ${user.id}`)
-  }
+  console.log(`Got user: ${user.name} (${user.username}) ID: ${user.id}`)
 
   let membershipProjects = [];
   const perPage = 100;
   for (let page = 1;page < 1000;page++) {
-    if (argv.verbose) {
-      console.log(`Retrieve page ${page} of membership projects`);
-    }
+    console.log(`Retrieve page ${page} of membership projects`);
 
     const pageItems = await rp.get(
       `${baseUrl}/api/v4/projects?membership=true&page=${page}&per_page=${perPage}`,
@@ -90,19 +81,15 @@ const cliProgress = require('cli-progress');
     membershipProjects = [...membershipProjects, ...pageItems];
   }
 
-  if (argv.verbose) {
-    console.log(
-      'Got membership projects:\n',
-      membershipProjects.map(p => p.name)
-    )
-  }
+  console.log(
+    'Got membership projects:\n',
+    membershipProjects.map(p => p.name)
+  )
 
   let pgits = _.map(personalProjects, 'http_url_to_repo')
 
-  if (argv.verbose) {
-    console.log('Backing up following repos')
-    console.log(pgits)
-  }
+  console.log('Backing up following repos')
+  console.log(pgits)
 
   const cloneProgressBar = new cliProgress.SingleBar(
     {},
@@ -114,6 +101,7 @@ const cliProgress = require('cli-progress');
   for (let repo of pgits) {
     const repoName = repo.substring(argv.method == 'ssh' ? 15 : 19, repo.length - 4)
     const repoPath = `${argv.output || 'gitlab-backup'}/${repoName}`
+    debugger
 
     if (fs.existsSync(repoPath)) {
       const stats = fs.statSync(repoPath)
