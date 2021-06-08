@@ -27,11 +27,6 @@ const cliProgress = require('cli-progress');
       type: 'string',
       description: 'Backup to output directory, defaults to ./gitlab-backup'
     })
-    .option('verbose', {
-      alias: 'v',
-      type: 'boolean',
-      description: 'Enable verbose output'
-    })
     .option('url', {
       alias: 'u',
       type: 'string',
