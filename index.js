@@ -74,7 +74,7 @@ const cliProgress = require('cli-progress');
   }
 
   const personalProjects = await rp.get(
-    `${baseUrl}/api/v4/users/${user.id}/projects`,
+    `${baseUrl}/api/v4/projects?membership=true&per_page=999`,
     requestOptions
   )
   if (argv.verbose) {
