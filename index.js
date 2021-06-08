@@ -76,6 +76,10 @@ const cliProgress = require('cli-progress');
   let personalProjects = [];
   const perPage = 100;
   for (let page = 1;page < 1000;page++) {
+    if (argv.verbose) {
+      console.log(`Retrieve page ${page} of personal projects`);
+    }
+
     const pageItems = await rp.get(
       `${baseUrl}/api/v4/projects?membership=true&page=${page}&per_page=${perPage}`,
       requestOptions
