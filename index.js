@@ -88,8 +88,7 @@ const cliProgress = require('cli-progress');
 
   let pgits = _.map(personalProjects, 'http_url_to_repo')
 
-  console.log('Backing up following repos')
-  console.log(pgits)
+  console.log(`Backing up ${pgits.length} repos`)
 
   const cloneProgressBar = new cliProgress.SingleBar(
     {},
