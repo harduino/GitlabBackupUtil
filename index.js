@@ -73,10 +73,20 @@ const cliProgress = require('cli-progress');
     console.log(`Got user: ${user.name} (${user.username}) ID: ${user.id}`)
   }
 
-  const personalProjects = await rp.get(
-    `${baseUrl}/api/v4/projects?membership=true&per_page=999`,
-    requestOptions
-  )
+  let personalProjects = [];
+  const perPage = 100;
+  for (let page = 1;page < 1000;page++) {
+    const pageItems = await rp.get(
+      `${baseUrl}/api/v4/projects?membership=true&page=${page}&per_page=${perPage}`,
+      requestOptions
+    )
+
+    if (!pageItems.length) {
+      break;
+    }
+
+    personalProjects = [...personalProjects, ...pageItems];
+  }
   if (argv.verbose) {
     console.log(
       'Got personal projects:\n',
