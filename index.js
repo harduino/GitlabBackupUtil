@@ -76,11 +76,11 @@ const cliProgress = require('cli-progress');
     console.log(`Got user: ${user.name} (${user.username}) ID: ${user.id}`)
   }
 
-  let personalProjects = [];
+  let membershipProjects = [];
   const perPage = 100;
   for (let page = 1;page < 1000;page++) {
     if (argv.verbose) {
-      console.log(`Retrieve page ${page} of personal projects`);
+      console.log(`Retrieve page ${page} of membership projects`);
     }
 
     const pageItems = await rp.get(
@@ -92,40 +92,14 @@ const cliProgress = require('cli-progress');
       break;
     }
 
-    personalProjects = [...personalProjects, ...pageItems];
+    membershipProjects = [...membershipProjects, ...pageItems];
   }
-  if (argv.verbose) {
-    console.log(
-      'Got personal projects:\n',
-      personalProjects.map(p => p.name)
-    )
-  }
-
-  let pgits = _.map(personalProjects, 'http_url_to_repo')
-
-  const groups = await rp.get(
-    `${baseUrl}/api/v4/groups?per_page=999`,
-    requestOptions
-  )
 
   if (argv.verbose) {
     console.log(
-      'Got groups:\n',
-      groups.map(g => g.name)
+      'Got membership projects:\n',
+      membershipProjects.map(p => p.name)
     )
-  }
-
-  const gids = _.map(groups, 'id')
-  for (let gid of gids) {
-    let projects = await rp.get(
-      `${baseUrl}/api/v4/groups/${gid}/projects?per_page=999`,
-      requestOptions
-    )
-    let ps = _.map(projects, method)
-    for (let p of ps) {
-      console.log(`Got project ${p} of ${gid}`)
-      pgits.push(p)
-    }
   }
 
   if (argv.verbose) {
