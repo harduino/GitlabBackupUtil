@@ -93,9 +93,9 @@ const cliProgress = require('cli-progress');
 
   let index = 0
   for (let repo of pgits) {
-    const repoName = repo.substring(argv.method == 'ssh' ? 15 : 19, repo.length - 4)
+    const { protocol, resource, pathname } = parseUrl(repo);
+    const repoName = pathname.substring(1, pathname.length - 4);
     const repoPath = `${argv.output || 'gitlab-backup'}/${repoName}`
-    debugger
 
     if (fs.existsSync(repoPath)) {
       const stats = fs.statSync(repoPath)
