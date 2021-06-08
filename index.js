@@ -81,12 +81,7 @@ const cliProgress = require('cli-progress');
     membershipProjects = [...membershipProjects, ...pageItems];
   }
 
-  console.log(
-    'Got membership projects:\n',
-    membershipProjects.map(p => p.name)
-  )
-
-  let pgits = _.map(personalProjects, 'http_url_to_repo')
+  let pgits = _.map(membershipProjects, 'http_url_to_repo')
 
   console.log(`Backing up ${pgits.length} repos`)
 
