@@ -59,7 +59,7 @@ const cliProgress = require('cli-progress');
     )
     process.exit(1)
   }
-  
+
   const method = argv.method == 'ssh' ? 'ssh_url_to_repo' : 'http_url_to_repo'
   const requestOptions = {
     json: true,
@@ -101,6 +101,8 @@ const cliProgress = require('cli-progress');
       membershipProjects.map(p => p.name)
     )
   }
+
+  let pgits = _.map(personalProjects, 'http_url_to_repo')
 
   if (argv.verbose) {
     console.log('Backing up following repos')
